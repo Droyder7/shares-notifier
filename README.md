@@ -1,3 +1,7 @@
+# Shares-Notifier
+
+A web app built with React to notify you about your of real time stock prices of your subscribed stocks by email or push notifications on your smartphone and PC.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
