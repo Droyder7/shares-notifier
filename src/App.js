@@ -1,9 +1,14 @@
+// Importing the Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import NavBar from './components/layout/NavBar';
+
 function App() {
-	return (
-		<div className="App">
-			<h1>Shares Notifier</h1>
-		</div>
-	);
+  return (
+    <div className="App">
+      <NavBar />
+    </div>
+  );
 }
 
 export default App;
