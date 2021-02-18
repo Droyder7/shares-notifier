@@ -8,7 +8,7 @@ const NavBar = () => {
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Shares Notifier</Navbar.Brand>
+        <Navbar.Brand href="/">Shares Notifier</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <LeftNavLinks />

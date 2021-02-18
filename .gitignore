@@ -21,5 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-src/components/auth/SignIn.js
-src/components/auth/SignUp.js
