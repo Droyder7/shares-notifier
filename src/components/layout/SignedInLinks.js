@@ -1,11 +1,12 @@
-import { Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
+import { useAuth } from '../../helper/AuthContext';
 
 export default function SignedInLinks() {
+  const { logout } = useAuth();
   return (
     <Nav>
-      <Navbar.Brand href="/addstock">Add Stocks</Navbar.Brand>
-      <Navbar.Brand href="/logout">Logout</Navbar.Brand>
+      <Nav.Link href="addstock">Add Stocks</Nav.Link>
+      <Nav.Link onClick={logout}>Logout</Nav.Link>
     </Nav>
   );
 }

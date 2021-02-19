@@ -1,11 +1,8 @@
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import isAuth from '../../helper/isAuth';
-
+import { useAuth } from '../../helper/AuthContext';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 
 export default function RightNavLinks() {
-  const isAuthenticated = isAuth();
-  return <>{isAuthenticated ? <SignedInLinks /> : <SignedOutLinks />}</>;
+  const { currentUser } = useAuth();
+  return <>{currentUser ? <SignedInLinks /> : <SignedOutLinks />}</>;
 }
