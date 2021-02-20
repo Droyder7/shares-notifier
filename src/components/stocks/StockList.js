@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
-import { getAllStocks } from '../../helper/stockDB';
+import { useData } from '../../helper/DataContext';
 
 export default function StockList() {
-  const [stocks, setStocks] = useState([]);
+  const stocks = useData();
 
   const stocksTable = () =>
     stocks.map((stock, index) => (
@@ -15,11 +14,6 @@ export default function StockList() {
         <td>{stock.currentPrice}</td>
       </tr>
     ));
-
-  useEffect(() => {
-    getAllStocks().then((s) => setStocks(s));
-    // return () => {};
-  }, []);
 
   return (
     <div>

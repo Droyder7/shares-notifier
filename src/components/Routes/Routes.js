@@ -5,6 +5,8 @@ import Home from '../pages/Home';
 import StockList from '../stocks/StockList';
 import Login from '../auth/Login';
 import Signup from '../auth/SignUp';
+import { DataProvider } from '../../helper/DataContext';
+import AddStock from '../stocks/AddStock';
 
 export default function Routes() {
   return (
@@ -18,7 +20,10 @@ export default function Routes() {
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <PrivateRoute path="/stocks" component={StockList} />
+            <DataProvider>
+              <PrivateRoute path="/stocks" component={StockList} />
+              <PrivateRoute path="/addStock" component={AddStock} />
+            </DataProvider>
           </Switch>
         </BrowserRouter>
       </div>
