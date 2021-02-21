@@ -3,12 +3,12 @@ import { useData } from '../../helper/DataContext';
 import AddStock from './AddStock';
 
 export default function StockList() {
-  const { subStocks } = useData();
+  const { subStocks, unSubscribeStock } = useData();
 
   const stocksTable = () =>
     subStocks.map((stock, index) => (
       <tr key={stock.id}>
-        <td>{index + 1}</td>
+        <td onClick={() => unSubscribeStock(stock.id)}>{index + 1}</td>
         <td>{stock.name}</td>
         <td>{stock.id}</td>
         <td>{stock.previousPrice}</td>
@@ -23,7 +23,7 @@ export default function StockList() {
       <Table responsive striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
+            <th>🗑️</th>
             <th>Brand Name</th>
             <th>Brand ID</th>
             <th>Previous Price</th>

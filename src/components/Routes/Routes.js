@@ -14,7 +14,7 @@ export default function Routes() {
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: '70vh' }}
     >
-      <div className="w-100" style={{ maxWidth: '500px' }}>
+      <div className="w-100" style={{ maxWidth: '800px' }}>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Home} />

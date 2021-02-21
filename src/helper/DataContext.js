@@ -25,6 +25,14 @@ export function DataProvider({ children }) {
     });
   }
 
+  function unSubscribeStock(stockId) {
+    return stockCollection.doc(stockId).update({
+      subscribers: firebaseApp.firestore.FieldValue.arrayRemove(
+        currentUser.email
+      ),
+    });
+  }
+
   useEffect(() => {
     stockCollection.onSnapshot(
       (snapshot) => {
@@ -60,6 +68,7 @@ export function DataProvider({ children }) {
     subStocks,
     otherStocks,
     subscribeStock,
+    unSubscribeStock,
   };
 
   return (
