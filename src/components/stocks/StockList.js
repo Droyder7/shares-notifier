@@ -1,11 +1,12 @@
 import { Table } from 'react-bootstrap';
 import { useData } from '../../helper/DataContext';
+import AddStock from './AddStock';
 
 export default function StockList() {
-  const stocks = useData();
+  const { subStocks } = useData();
 
   const stocksTable = () =>
-    stocks.map((stock, index) => (
+    subStocks.map((stock, index) => (
       <tr key={stock.id}>
         <td>{index + 1}</td>
         <td>{stock.name}</td>
@@ -17,7 +18,8 @@ export default function StockList() {
 
   return (
     <div>
-      <h2 className="text-center mb-4">Stock List</h2>
+      <h2 className="text-center mb-4">Subscribed Stocks</h2>
+      <AddStock />
       <Table responsive striped bordered hover>
         <thead>
           <tr>

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
-import { db } from './firebase';
+import firebaseApp, { db } from './firebase';
 
 const DataContext = React.createContext();
 
@@ -9,46 +9,61 @@ export function useData() {
 }
 
 export function DataProvider({ children }) {
-  const [stocks, setStocks] = useState([]);
+  const [subStocks, setSubStocks] = useState([]);
+  const [otherStocks, setOtherStocks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const stockCollection = db.collection('Stocks');
+  // const userCollection = db.collection('Users');
   const { currentUser } = useAuth();
 
-  // function logout() {
-  //   return auth.signOut();
-  // }
+  function subscribeStock(stockId) {
+    return stockCollection.doc(stockId).update({
+      subscribers: firebaseApp.firestore.FieldValue.arrayUnion(
+        currentUser.email
+      ),
+    });
+  }
 
   useEffect(() => {
-    const subscribe = stockCollection
-      .where('subscribers', 'array-contains', currentUser.email)
-      .onSnapshot(
-        (snapshot) => {
-          const stocksArr = snapshot.docs.map((doc) => doc.data());
-          console.log('Subscribed to stocksArr', stocksArr);
-          setStocks(stocksArr);
-          setLoading(false);
-        },
-        (error) => {
-          console.log(error);
-          // ...
-        }
-      );
+    stockCollection.onSnapshot(
+      (snapshot) => {
+        const allStocksArr = snapshot.docs.map((doc) => doc.data());
 
-    return function unsubscribe() {
+        setOtherStocks(
+          allStocksArr.filter(
+            (stock) => !stock.subscribers?.includes(currentUser.email)
+          )
+        );
+        // console.log('unSubscribed Stocks', otherStocks);
+
+        setSubStocks(
+          allStocksArr.filter((stock) =>
+            stock.subscribers?.includes(currentUser.email)
+          )
+        );
+
+        // console.log('Subscribed Stocks', subStocks);
+
+        setLoading(false);
+      },
+      (error) => console.log(error)
+    );
+
+    return () =>
       stockCollection.onSnapshot(() =>
         console.log('Snapshot listening unsubscribed')
       );
-    };
   }, []);
 
-  // const value = {
-  //   stocks,
-  //   logout,
-  // };
+  const value = {
+    subStocks,
+    otherStocks,
+    subscribeStock,
+  };
 
   return (
-    <DataContext.Provider value={stocks}>
+    <DataContext.Provider value={value}>
       {!loading && children}
     </DataContext.Provider>
   );
