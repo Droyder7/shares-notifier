@@ -1,6 +1,5 @@
 import { Table } from 'react-bootstrap';
 import { useData } from '../../helper/DataContext';
-import AddStock from './AddStock';
 
 export default function StockList() {
   const { subStocks, unSubscribeStock } = useData();
@@ -17,21 +16,17 @@ export default function StockList() {
     ));
 
   return (
-    <div>
-      <h2 className="text-center mb-4">Subscribed Stocks</h2>
-      <AddStock />
-      <Table responsive striped bordered hover>
-        <thead>
-          <tr>
-            <th>🗑️</th>
-            <th>Brand Name</th>
-            <th>Brand ID</th>
-            <th>Previous Price</th>
-            <th>Current Price</th>
-          </tr>
-        </thead>
-        <tbody>{stocksTable()}</tbody>
-      </Table>
-    </div>
+    <Table responsive striped bordered hover>
+      <thead>
+        <tr>
+          <th>🗑️</th>
+          <th>Brand Name</th>
+          <th>Brand ID</th>
+          <th>Previous Price</th>
+          <th>Current Price</th>
+        </tr>
+      </thead>
+      <tbody>{stocksTable()}</tbody>
+    </Table>
   );
 }

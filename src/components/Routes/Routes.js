@@ -2,11 +2,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import PrivateRoute from './PrivateRoute';
 import Home from '../pages/Home';
-import StockList from '../stocks/StockList';
 import Login from '../auth/Login';
 import Signup from '../auth/SignUp';
-import { DataProvider } from '../../helper/DataContext';
-import AddStock from '../stocks/AddStock';
+import Error from '../pages/Error';
+import Stocks from '../stocks/Stocks';
 
 export default function Routes() {
   return (
@@ -20,10 +19,9 @@ export default function Routes() {
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <DataProvider>
-              <PrivateRoute path="/stocks" component={StockList} />
-              <PrivateRoute path="/addStock" component={AddStock} />
-            </DataProvider>
+            <PrivateRoute path="/stocks" component={Stocks} />
+            {/* <PrivateRoute path="/addStock" component={AddStock} /> */}
+            <Route component={Error} />
           </Switch>
         </BrowserRouter>
       </div>
